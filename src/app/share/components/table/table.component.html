@@ -1,0 +1,51 @@
+<div class="table-responsive">
+  <table class="table table-dark table-hover table-bordered">
+    <thead>
+      <tr>
+        <th scope="row" *ngFor="let columnName of listColumnsName">
+          {{columnName.name}}&nbsp;
+          <i class="fa fa-sort" (click)="sortByField(columnName.value)"></i>
+          <input style="width:100%" [formControl]="listSearchForm[columnName.value]" />
+        </th>
+        <th scope="row" style="line-height: 60px;">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let record of listRecord | orderBy: key : reverse | paginate: { itemsPerPage: numberPerPage, currentPage: currentPage }">
+        <td *ngFor="let columnName of listColumnsName">
+          {{record[columnName.value]}}
+        </td>
+        <td class="actions">
+          <button type="button" class="btn btn-primary" style="font-size: 14px;" routerLink="../detail/{{record.id}}">Detail</button>
+          <button type="button" class="btn btn-secondary mx-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+            <i class="fas fa-edit"></i>
+          </button>
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-danger" data-bs-placement="top" title="Delete" data-bs-toggle="modal" attr.data-bs-target="#exampleModal_{{record.id}}">
+            <i class="far fa-trash-alt"></i>
+          </button>
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal_{{record.id}}" tabindex="-1" attr.aria-labelledby="exampleModalLabel_{{record.id}}" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" style="color:black" id="exampleModalLabel_{{record.id}}">
+                    Are you sure to want delete this item ?
+                  </h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="onDeleteRecord(record.id)">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-center mt-3">
+    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+  </div>
+</div>
