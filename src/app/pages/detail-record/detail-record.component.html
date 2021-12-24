@@ -1,0 +1,48 @@
+
+<div class="container">
+  <h3 style="text-align: center" class="text-primary">Record Detail Info</h3>
+  <div class="card text-dark bg-light" *ngIf="record$ | async as record else loadingSpinner">
+    <div class="card-header ">
+      <h5>Record Detail {{record.id}}</h5>
+    </div>
+    <div class="card-body">
+      <div class="row p-2">
+        <ng-container *ngFor="let obj of realRecord">
+          <div class="col-4 px-5">
+            <div class="d-flex justify-content-between">
+              <h6>{{obj.key}} :</h6>
+              <p>{{obj.value || 'NULL'}}</p>
+            </div>
+            <hr>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <div class="card-footer d-flex justify-content-between">
+      <button type="button" class="btn btn-success" routerLink="">Back to Home</button>
+      <div class="actions-btn">
+        <button type="button" class="btn btn-secondary me-2">Edit</button>
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
+        <!-- modal delete -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" style="color:black" id="exampleModalLabel">
+                  Are you sure to want delete this item ?
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="onDeleteRecord(record.id)">Delete</button>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #loadingSpinner>
+  <p>Loading ...</p>
+</ng-template>
