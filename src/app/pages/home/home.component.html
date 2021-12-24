@@ -1,0 +1,23 @@
+<div class="home">
+  <div class="nav d-flex justify-content-between bg-light p-3 mb-3 rounded-3">
+    <div class="nav-left d-flex">
+      <div class="input-group align-items-center">
+        <label class="me-2">Show :</label>
+        <select class="rounded-2 ps-1 pe-2 me-4" [(ngModel)]= "numberPerPage" (change)="onChange($event)">
+          <option selected>10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+          <option value="50">50</option>
+        </select>
+      </div>
+    </div>
+    <button type="button" class="btn btn-primary">Create Record</button>
+  </div>
+  <app-table
+    [numberPerPage]="numberPerPage"
+    [listColumnsName]="listColumnsName"
+    [listRecord]="listRecord"
+    (handleFilterByField)="handleFilterByField($event)"
+    (handleDeleteRecord)="handleDeleteRecord($event)"
+  ></app-table>
+</div>
