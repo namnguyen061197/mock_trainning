@@ -7,21 +7,21 @@
           <i class="fa fa-sort" (click)="sortByField(columnName.value)"></i>
           <input style="width:100%" [formControl]="listSearchForm[columnName.value]" />
         </th>
-        <th scope="row" style="line-height: 60px;">Actions</th>
+        <th scope="row" style="line-height: 60px">Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let record of listRecord | orderBy: key : reverse | paginate: { itemsPerPage: numberPerPage, currentPage: currentPage }">
         <td *ngFor="let columnName of listColumnsName">
-          {{record[columnName.value]}}
+          {{columnName.value === 'Date' ? (record[columnName.value] | date :'shortDate' ) : record[columnName.value]}}
         </td>
         <td class="actions">
-          <button type="button" class="btn btn-primary" style="font-size: 14px;" routerLink="../detail/{{record.id}}">Detail</button>
-          <button type="button" class="btn btn-secondary mx-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+          <button type="button" class="btn btn-primary" style="font-size: 14px;" routerLink="../detail/{{record.id}}">{{'detail'|translate}}</button>
+          <button type="button" class="btn btn-secondary mx-2" data-bs-toggle="tooltip" routerLink="../edit_record/{{record.id}}" data-bs-placement="top" title="{{'edit'|translate}}">
             <i class="fas fa-edit"></i>
           </button>
           <!-- Button trigger modal -->
-          <button type="button" class="btn btn-danger" data-bs-placement="top" title="Delete" data-bs-toggle="modal" attr.data-bs-target="#exampleModal_{{record.id}}">
+          <button type="button" class="btn btn-danger" data-bs-placement="top" title="{{'delete'|translate}}" data-bs-toggle="modal" attr.data-bs-target="#exampleModal_{{record.id}}">
             <i class="far fa-trash-alt"></i>
           </button>
           <!-- Modal -->
@@ -30,13 +30,15 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" style="color:black" id="exampleModalLabel_{{record.id}}">
-                    Are you sure to want delete this item ?
+                    {{'alertQuote.deleteDetail'| translate}} {{record.id}}?
                   </h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="onDeleteRecord(record.id)">Delete</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{'close'|translate}}</button>
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="onDeleteRecord(record.id)">
+                    {{'delete'|translate}}
+                  </button>
                 </div>
               </div>
             </div>
@@ -46,6 +48,10 @@
     </tbody>
   </table>
   <div class="d-flex justify-content-center mt-3">
-    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+    <pagination-controls
+      (pageChange)="currentPage = $event"
+      [previousLabel]="'previous'|translate"
+      [nextLabel]="'next'|translate"
+    ></pagination-controls>
   </div>
 </div>

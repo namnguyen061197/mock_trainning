@@ -4,3 +4,15 @@ span, a {
 span:hover {
   border-bottom: 1px solid black;
 }
+.select-form {
+  border-radius: 5px;
+  padding: 0.25rem 0.5rem;
+}
+@media screen and (max-width:376px) {
+  .navbar-right {
+    justify-content: space-between!important;
+  }
+  .container-fluid{
+    display: block!important;
+  }
+}

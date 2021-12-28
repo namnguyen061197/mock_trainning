@@ -2,4 +2,7 @@
 <div class="container-fluid mt-4">
   <router-outlet></router-outlet>
 </div>
+<div class="loader" *ngIf="isLoading">
+  <img src="../assets/images/spin-loader.gif" alt="loading.gif" />
+</div>
 

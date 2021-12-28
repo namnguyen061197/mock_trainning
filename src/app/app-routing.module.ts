@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CreateRecordComponent } from './pages/create-record/create-record.component';
 import { DetailRecordComponent } from './pages/detail-record/detail-record.component';
 import { HomeComponent } from './pages/home/home.component';
 
@@ -16,6 +17,19 @@ const routes: Routes = [
   {
     path:'detail/:idRecord',
     component:DetailRecordComponent
+  },
+  {
+    path:'new_record',
+    component:CreateRecordComponent
+  },
+  {
+    path:'edit_record/:idRecord',
+    component:CreateRecordComponent
+  },
+  {
+    path:'**',
+    redirectTo:'home',
+    pathMatch:'full'
   }
 ];
 
