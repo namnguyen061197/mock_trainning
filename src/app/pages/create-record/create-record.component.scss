@@ -1,0 +1,14 @@
+label {
+  font-weight: 500;
+  margin-bottom: 0.35rem;
+}
+.input-field{
+  margin: 0.5rem 0 0.75rem;
+}
+input.ng-invalid.ng-dirty {
+  border: red 1px solid;
+}
+.text-danger {
+  margin-top: 0.25rem;
+}
+

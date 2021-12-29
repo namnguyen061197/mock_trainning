@@ -1,8 +1,12 @@
 <nav class="navbar navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand fw-bold">MOCK PROJECT</a>
-    <div class="navbar-right">
-      <span class="fs-6" routerLink="">HOME</span>
+  <div class="container-fluid px-4">
+    <a class="navbar-brand fw-bold" routerLink="">MOCK PROJECT</a>
+    <div class="navbar-right d-flex align-items-center">
+      <span class="fs-6 me-3" routerLink="">{{'home' | translate | uppercase}} </span>
+      <select class="select-form" [formControl]="langInput">
+        <option value="en">English</option>
+        <option value="vn">Tiếng Việt</option>
+      </select>
     </div>
   </div>
 </nav>

@@ -35,4 +35,12 @@ export class RecordService {
   public getRecord(id:any):Observable<any> {
     return this.http.get(`${BASE_API}/${id}`)
   }
+
+  public addNewRecord(record:any):Observable<any>{
+    return this.http.post(BASE_API, record)
+  }
+
+  public putRecord(id:string, record:any):Observable<any>{
+    return this.http.put(`${BASE_API}/${id}`, record)
+  }
 }

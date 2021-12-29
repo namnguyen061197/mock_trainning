@@ -1,0 +1,37 @@
+{
+  "home":"home",
+  "show":"Show",
+  "createRecord":"Create Record",
+  "editRecord":"Edit Record",
+  "recordDetailTitle":"Record Detail Info",
+  "recordDetail":"Record Detail",
+  "backHome": "Back to Home",
+  "edit":"Edit",
+  "delete":"Delete",
+  "cancel":"Cancel",
+  "reset":"Reset",
+  "agree":"Agree",
+  "close":"Close",
+  "add":"Add",
+  "save":"Save",
+  "detail":"Detail",
+  "basicInfo":"Basic Information",
+  "priceInfo":"Price Information",
+  "optionInfo":"Optional Information",
+  "validator": {
+    "required":"field is required !",
+    "decimal":"must be decimal !",
+    "positive":"must be positive interger !"
+  },
+  "alertQuote": {
+    "delete":"Are you sure to delete this record ?",
+    "backPrevPage":"Are you sure to want to go previous page ?",
+    "reset":"Are you sure to want to reset form ?",
+    "edit":"Are you sure to want to save edit record ?",
+    "deleteDetail":"Are you sure to delete record ",
+    "canLeave":"Are you sure to leave edit record page ?"
+  },
+  "loading":"Loading...",
+  "previous":"Previous",
+  "next":"Next"
+}

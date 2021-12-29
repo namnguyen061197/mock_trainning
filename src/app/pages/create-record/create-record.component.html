@@ -1,1 +1,250 @@
-<p>create-record works!</p>
+<div class="new-record container">
+  <h3 *ngIf="!isEditMode ; else editTitleRecord">{{'createRecord' | translate}}</h3>
+  <ng-template #editTitleRecord>
+    <h3>{{'editRecord' | translate}} {{idRecord}}</h3>
+  </ng-template>
+  <hr>
+  <form [formGroup]="recordForm">
+    <div class="row">
+      <div class="col-md-7 col-sm-12 mt-3">
+        <div class="card text-dark bg-light px-3 py-2">
+          <h4 class="mb-3 mt-2">{{'basicInfo'|translate}}</h4>
+          <div class="input-field">
+            <label>Date <span class="text-danger">*</span></label>
+            <input type="date" class="form-control px-2" formControlName="Date">
+            <div *ngIf="isFieldValid('Date')" class="text-danger">
+              <p *ngIf="isFieldHasError('Date','required')">Date {{'validator.required'|translate}}</p>
+            </div>
+          </div>
+          <div class="input-field">
+            <label>Region Name <span class="text-danger">*</span></label>
+            <select class="form-control px-2" formControlName="RegionName">
+              <option *ngFor="let group of listGroupFields" [value]="group.RegionName">{{group.RegionName}}</option>
+            </select>
+          </div>
+          <div class="input-field">
+            <label>Area <span class="text-danger">*</span></label>
+            <input type="text" class="form-control px-2 " formControlName="Area" [readonly]="true">
+            <div *ngIf="isFieldValid('Area')" class="text-danger">
+              <p *ngIf="isFieldHasError('Area','required')">Area {{'validator.required'|translate}}</p>
+            </div>
+          </div>
+          <div class="input-field">
+            <label>Area Code <span class="text-danger">*</span></label>
+            <input type="text" class="form-control px-2" formControlName="AreaCode" [readonly]="true">
+          </div>
+          <div class="input-field">
+            <label>Sales Volume <span class="text-danger">*</span></label>
+            <input type="number" class="form-control px-2" formControlName="SalesVolume">
+            <div *ngIf="isFieldValid('SalesVolume')" class="text-danger">
+              <p *ngIf="isFieldHasError('SalesVolume','required')">Sales Volume {{'validator.required'|translate}}</p>
+              <p *ngIf="isFieldHasError('SalesVolume','min')">Sales Volume {{'validator.positive'|translate}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="card text-dark bg-light px-3 py-2 mt-4">
+          <h4 class="mb-1 mt-2">{{'optionInfo' | translate}}</h4>
+          <div class="row">
+            <div class="col-md-4 col-sm-12">
+              <div class="input-field">
+                <label>Index SA</label>
+                <input type="text" class="form-control px-2" formControlName="IndexSA">
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <div class="input-field">
+                <label>Average Price SA</label>
+                <input type="text" class="form-control px-2" formControlName="AveragePriceSA">
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <div class="input-field">
+                <label>1m%Change</label>
+                <input type="text" class="form-control px-2" formControlName="1m%Change">
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <div class="input-field">
+                <label>12m%Change</label>
+                <input type="text" class="form-control px-2" formControlName="12m%Change">
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <div class="input-field">
+                <label>Detached1m%Change</label>
+                <input type="text" class="form-control px-2" formControlName="Detached1m%Change">
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <div class="input-field">
+                <label>Detached12m%Change</label>
+                <input type="text" class="form-control px-2" formControlName="Detached12m%Change">
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <div class="input-field">
+                <label>Semi Detached 1m%Change</label>
+                <input type="text" class="form-control px-2" formControlName="SemiDetached1m%Change">
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <div class="input-field">
+                <label>Semi Detached 12m%Change</label>
+                <input type="text" class="form-control px-2" formControlName="SemiDetached1m%Change">
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <div class="input-field">
+                <label>Terraced 1m%Change</label>
+                <input type="text" class="form-control px-2" formControlName="Terraced1m%Change">
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <div class="input-field">
+                <label>Terraced 12m%Change</label>
+                <input type="text" class="form-control px-2" formControlName="Terraced12m%Change">
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <div class="input-field">
+                <label>Flat 1m%Change</label>
+                <input type="text" class="form-control px-2" formControlName="Flat1m%Change">
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <div class="input-field">
+                <label>Flat 12m%Change</label>
+                <input type="text" class="form-control px-2" formControlName="Flat12m%Change">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5 col-sm-12 mt-3">
+        <div class="card text-dark bg-light px-3 py-2">
+          <h4 class="mb-3 mt-2">{{'priceInfo' | translate}}</h4>
+          <div class="input-field">
+            <label>Average Price <span class="text-danger">*</span></label>
+            <input type="number" step="0.01" class="form-control px-2" formControlName="AveragePrice">
+            <div *ngIf="isFieldValid('AveragePrice')" class="text-danger">
+              <p *ngIf="isFieldHasError('AveragePrice','required')">Average Price {{'validator.required'|translate}}</p>
+              <p *ngIf="isFieldHasError('AveragePrice','pattern')">Average Price {{'validator.decimal'|translate}}</p>
+            </div>
+          </div>
+          <div class="input-field">
+            <label>Index <span class="text-danger">*</span></label>
+            <input type="number" class="form-control px-2" formControlName="Index">
+            <div *ngIf="isFieldValid('Index')" class="text-danger">
+              <p *ngIf="isFieldHasError('Index','required')">Index {{'validator.required'|translate}}</p>
+              <p *ngIf="isFieldHasError('Index','pattern')">Index {{'validator.decimal'|translate}}</p>
+            </div>
+          </div>
+          <div class="input-field">
+            <label>Detached Price <span class="text-danger">*</span></label>
+            <input type="number" class="form-control px-2" formControlName="DetachedPrice">
+            <div *ngIf="isFieldValid('DetachedPrice')" class="text-danger">
+              <p *ngIf="isFieldHasError('DetachedPrice','required')">Detached Price {{'validator.required'|translate}}</p>
+              <p *ngIf="isFieldHasError('DetachedPrice','pattern')">Detached Price {{'validator.decimal'|translate}}</p>
+            </div>
+          </div>
+          <div class="input-field">
+            <label>Detached Index <span class="text-danger">*</span></label>
+            <input type="number" class="form-control px-2" formControlName="DetachedIndex">
+            <div *ngIf="isFieldValid('DetachedIndex')" class="text-danger">
+              <p *ngIf="isFieldHasError('DetachedIndex','required')">Detached Index {{'validator.required'|translate}}</p>
+              <p *ngIf="isFieldHasError('DetachedIndex','pattern')">Detached Index {{'validator.decimal'|translate}}</p>
+            </div>
+          </div>
+          <div class="input-field">
+            <label>Semi Detached Price <span class="text-danger">*</span></label>
+            <input type="number" class="form-control px-2" formControlName="SemiDetachedPrice">
+            <div *ngIf="isFieldValid('SemiDetachedPrice')" class="text-danger">
+              <p *ngIf="isFieldHasError('SemiDetachedPrice','required')">Semi Detached Price {{'validator.required'|translate}}</p>
+              <p *ngIf="isFieldHasError('SemiDetachedPrice','pattern')">SemiDetached Price {{'validator.decimal'|translate}}</p>
+            </div>
+          </div>
+          <div class="input-field">
+            <label>Semi Detached Index <span class="text-danger">*</span></label>
+            <input type="number" class="form-control px-2" formControlName="SemiDetachedIndex">
+            <div *ngIf="isFieldValid('SemiDetachedIndex')" class="text-danger">
+              <p *ngIf="isFieldHasError('SemiDetachedIndex','required')">Semi Detached Index {{'validator.required'|translate}}</p>
+              <p *ngIf="isFieldHasError('SemiDetachedIndex','pattern')">SemiDetached Index {{'validator.decimal'|translate}}</p>
+            </div>
+          </div>
+          <div class="input-field">
+            <label>Terraced Price <span class="text-danger">*</span></label>
+            <input type="number" class="form-control px-2" formControlName="TerracedPrice">
+            <div *ngIf="isFieldValid('TerracedPrice')" class="text-danger">
+              <p *ngIf="isFieldHasError('TerracedPrice','required')">Terraced Price {{'validator.required'|translate}}</p>
+              <p *ngIf="isFieldHasError('TerracedPrice','pattern')">Terrace Price {{'validator.decimal'|translate}}</p>
+            </div>
+          </div>
+          <div class="input-field">
+            <label>Terraced Index <span class="text-danger">*</span></label>
+            <input type="number" class="form-control px-2" formControlName="TerracedIndex">
+            <div *ngIf="isFieldValid('TerracedIndex')" class="text-danger">
+              <p *ngIf="isFieldHasError('TerracedIndex','required')">Terraced Index {{'validator.required'|translate}}</p>
+              <p *ngIf="isFieldHasError('TerracedIndex','pattern')">Terrace Index {{'validator.decimal'|translate}}</p>
+            </div>
+          </div>
+          <div class="input-field">
+            <label>Flat Price <span class="text-danger">*</span></label>
+            <input type="number" class="form-control px-2" formControlName="FlatPrice">
+            <div *ngIf="isFieldValid('FlatPrice')" class="text-danger">
+              <p *ngIf="isFieldHasError('FlatPrice','required')">Flat Price {{'validator.required'|translate}}</p>
+              <p *ngIf="isFieldHasError('FlatPrice','pattern')">Flat Price {{'validator.decimal'|translate}}</p>
+            </div>
+          </div>
+          <div class="input-field">
+            <label>Flat Index <span class="text-danger">*</span></label>
+            <input type="number" class="form-control px-2" formControlName="FlatIndex">
+            <div *ngIf="isFieldValid('FlatIndex')" class="text-danger">
+              <p *ngIf="isFieldHasError('FlatIndex','required')">Flat Index {{'validator.required'|translate}}</p>
+              <p *ngIf="isFieldHasError('FlatIndex','pattern')">Flat Index {{'validator.decimal'|translate}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="btn-groups my-3 d-flex justify-content-end">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cancelModal">{{'cancel'|translate}}</button>
+      <button type="button" class="btn btn-danger mx-2 text-white" data-bs-toggle="modal" data-bs-target="#resetModal">{{'reset'|translate}}</button>
+      <button
+        type="submit"
+        class="btn btn-success"
+        (click)="onAddNewRecord()"
+        [disabled]="!recordForm?.valid || false"
+        *ngIf="!isEditMode;else editBtn"
+      >
+        {{'add' | translate}}
+      </button>
+      <ng-template #editBtn>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editModal" >{{'save'|translate}}</button>
+      </ng-template>
+    </div>
+    <!-- cancel modal -->
+    <app-modal
+      [alertQuote]= "'alertQuote.backPrevPage'|translate"
+      [idModal]= "'cancelModal'"
+      [nameHandleBtn]= "'agree'|translate"
+      (handleFunction)="onBackHistoryPage()"
+    >
+    </app-modal>
+    <!-- reset modal -->
+    <app-modal
+      [alertQuote]= "'alertQuote.reset'|translate"
+      [idModal]= "'resetModal'"
+      [nameHandleBtn]="'agree'|translate"
+      (handleFunction)="onResetForm()"
+    >
+    </app-modal>
+    <!-- add modal -->
+    <app-modal
+      [alertQuote]= "'alertQuote.edit'|translate"
+      [idModal]= "'editModal'"
+      [nameHandleBtn]="'agree'|translate"
+      (handleFunction)="onSaveEditRecord()"
+    >
+    </app-modal>
+  </form>
+</div>

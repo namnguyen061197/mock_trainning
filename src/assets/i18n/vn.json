@@ -1,0 +1,37 @@
+{
+  "home": "Trang chủ",
+  "show":"Hiển thị",
+  "createRecord":"Tạo mới bản ghi",
+  "editRecord":"Chỉnh sửa bản ghi",
+  "recordDetailTitle":"Thông tin chi tiết bản ghi",
+  "recordDetail":"Chi tiết bản ghi",
+  "backHome": "Quay lại trang chủ",
+  "edit":"Sửa",
+  "delete":"Xóa",
+  "cancel":"Quay lại ",
+  "reset":"Đặt lại",
+  "agree":"Đồng ý",
+  "close":"Hủy bỏ",
+  "add":"Thêm mới",
+  "save":"Lưu lại",
+  "detail":"Chi tiết",
+  "basicInfo":"Thông tin cơ bản",
+  "priceInfo":"Thông tin về giá",
+  "optionInfo":"Thông tin không bắt buộc",
+  "validator": {
+    "required":"là trường bắt buộc !",
+    "decimal":"phải là số thập phân !",
+    "positive":"phải là số dương !"
+  },
+  "alertQuote": {
+    "delete":"Bạn có chắc muốn xóa bản ghi này ?",
+    "backPrevPage":"Bạn có chắc muốn quay lại trang trước ?",
+    "reset":"Bạn có chắc muốn reset lại form ?",
+    "edit":"Bạn có chắc muốn lưu bản chỉnh sửa này ?",
+    "deleteDetail":"Bạn có chắc muốn xóa bản ghi  ",
+    "canLeave":"Bạn có chắc muốn thoát khỏi trang edit ?"
+  },
+  "loading":"Đang tải trang ...",
+  "previous":"Trước",
+  "next":"Sau"
+}
