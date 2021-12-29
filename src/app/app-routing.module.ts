@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CreateRecordComponent } from './pages/create-record/create-record.component';
 import { DetailRecordComponent } from './pages/detail-record/detail-record.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ConfirmLeaveGuard } from './core/guards/confirm-leave.guard'
 
 const routes: Routes = [
   {
@@ -24,7 +25,8 @@ const routes: Routes = [
   },
   {
     path:'edit_record/:idRecord',
-    component:CreateRecordComponent
+    component:CreateRecordComponent,
+    canDeactivate:[ConfirmLeaveGuard]
   },
   {
     path:'**',

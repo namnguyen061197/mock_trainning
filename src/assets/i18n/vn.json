@@ -28,7 +28,8 @@
     "backPrevPage":"Bạn có chắc muốn quay lại trang trước ?",
     "reset":"Bạn có chắc muốn reset lại form ?",
     "edit":"Bạn có chắc muốn lưu bản chỉnh sửa này ?",
-    "deleteDetail":"Bạn có chắc muốn xóa bản ghi  "
+    "deleteDetail":"Bạn có chắc muốn xóa bản ghi  ",
+    "canLeave":"Bạn có chắc muốn thoát khỏi trang edit ?"
   },
   "loading":"Đang tải trang ...",
   "previous":"Trước",

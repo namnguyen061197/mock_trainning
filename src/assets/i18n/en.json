@@ -28,7 +28,8 @@
     "backPrevPage":"Are you sure to want to go previous page ?",
     "reset":"Are you sure to want to reset form ?",
     "edit":"Are you sure to want to save edit record ?",
-    "deleteDetail":"Are you sure to delete record "
+    "deleteDetail":"Are you sure to delete record ",
+    "canLeave":"Are you sure to leave edit record page ?"
   },
   "loading":"Loading...",
   "previous":"Previous",

@@ -1,8 +1,9 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { distinctUntilChanged } from 'rxjs';
 import { RecordService } from 'src/app/core/services/record.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class CreateRecordComponent implements OnInit {
   public idRecord:string = ''
   public isEditMode:boolean = false;
   public decimalPattern = /^\d*\.\d+$/;
+  public canLeavePage:boolean = false;
   public listGroupFields = [
     {
       RegionName:'Greater Manchester',
@@ -142,6 +144,7 @@ export class CreateRecordComponent implements OnInit {
   }
 
   onBackHistoryPage():void{
+    this.canLeavePage= true;
     setTimeout(() => {
       this._location.back()
     }, 1000);
@@ -167,6 +170,7 @@ export class CreateRecordComponent implements OnInit {
       this.recordService.putRecord(this.idRecord, this.recordForm.value).subscribe(
         data => {
           this.toastrService.success('Edit record success !');
+          this.canLeavePage= true;
           setTimeout(() => {
             this.router.navigateByUrl('')
           },1500)
