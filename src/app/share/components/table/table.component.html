@@ -11,13 +11,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let record of listRecord | orderBy: key : reverse | paginate: { itemsPerPage: numberPerPage, currentPage: currentPage }">
+      <tr *ngFor="let record of listRecord | orderBy: key | paginate: { itemsPerPage: numberPerPage, currentPage: currentPage, totalItems: totalItems }">
         <td *ngFor="let columnName of listColumnsName">
           {{columnName.value === 'Date' ? (record[columnName.value] | date :'shortDate' ) : record[columnName.value]}}
         </td>
         <td class="actions">
           <button type="button" class="btn btn-primary" style="font-size: 14px;" routerLink="../detail/{{record.id}}">{{'detail'|translate}}</button>
-          <button type="button" class="btn btn-secondary mx-2" data-bs-toggle="tooltip" routerLink="../edit_record/{{record.id}}" data-bs-placement="top" title="{{'edit'|translate}}">
+          <button type="button" class="btn btn-secondary mx-2" data-bs-toggle="tooltip" routerLink="../record/edit/{{record.id}}" data-bs-placement="top" title="{{'edit'|translate}}">
             <i class="fas fa-edit"></i>
           </button>
           <!-- Button trigger modal -->
@@ -49,7 +49,7 @@
   </table>
   <div class="d-flex justify-content-center mt-3">
     <pagination-controls
-      (pageChange)="currentPage = $event"
+      (pageChange)="onHandleChangePage($event)"
       [previousLabel]="'previous'|translate"
       [nextLabel]="'next'|translate"
     ></pagination-controls>

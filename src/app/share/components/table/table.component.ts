@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 import { RecordService } from 'src/app/core/services/record.service';
+import { IColumnName } from 'src/app/interfaces/ICoumnName';
+import { Irecord } from 'src/app/interfaces/IRecord';
 
 @Component({
   selector: 'app-table',
@@ -12,13 +14,16 @@ export class TableComponent implements OnInit {
   public key:string = 'id';
   public reverse:boolean = false;
   public currentPage:number = 1;
-  public listSearchForm:any;
+  public listSearchForm!:Array<FormControl> | any;
 
-  @Input() numberPerPage?:number;
-  @Input() listColumnsName?:Array<any>;
-  @Input() listRecord?:Array<any>
+  @Input() numberPerPage!:number;
+  @Input() listColumnsName!:Array<IColumnName>;
+  @Input() listRecord?:Array<Irecord>
+  @Input() totalItems!:number;
   @Output() handleFilterByField = new EventEmitter();
-  @Output() handleDeleteRecord = new EventEmitter()
+  @Output() handleDeleteRecord = new EventEmitter();
+  @Output() handleSortByField = new EventEmitter();
+  @Output() handleChangePage = new EventEmitter()
 
   constructor() {
   }
@@ -36,19 +41,29 @@ export class TableComponent implements OnInit {
         debounceTime(500),
         distinctUntilChanged()
       )
-      .subscribe((data:any) => {
+      .subscribe((data:IFilterField) => {
         this.handleFilterByField.emit({field: column.value, key: data})
       })
     })
   }
 
   sortByField(field:string):void{
-    this.key = field;
     this.reverse = !this.reverse;
+    this.handleSortByField.emit({key:field, order: this.reverse ? 'desc' : 'asc'})
   }
 
-  onDeleteRecord(id:any){
+  onDeleteRecord(id:number){
     this.handleDeleteRecord.emit(id)
   }
 
+  onHandleChangePage(event:number){
+    this.currentPage = event
+    this.handleChangePage.emit(event)
+  }
+
+}
+
+interface IFilterField {
+  field: any,
+  key:any
 }

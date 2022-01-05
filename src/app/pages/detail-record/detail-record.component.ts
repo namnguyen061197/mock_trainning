@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { map, Observable, switchMap } from 'rxjs';
 import { RecordService } from 'src/app/core/services/record.service';
+import { IColumnName } from 'src/app/interfaces/ICoumnName';
+import { Irecord } from 'src/app/interfaces/IRecord';
 
 @Component({
   selector: 'app-detail-record',
@@ -10,8 +12,8 @@ import { RecordService } from 'src/app/core/services/record.service';
   styleUrls: ['./detail-record.component.scss']
 })
 export class DetailRecordComponent implements OnInit {
-  public record:any;
-  public realRecord?:any;
+  public record!:Irecord;
+  public realRecord!:Array<IRealRecord>;
   constructor(
     private route:ActivatedRoute,
     private recordService:RecordService,
@@ -26,10 +28,11 @@ export class DetailRecordComponent implements OnInit {
         this.recordService.getRecord(idRecord).subscribe(
           data => {
             this.record = data;
-            this.realRecord = Object.entries(data).map(item => new Object({key:item[0],value:item[1]}));
+            this.realRecord = Object.entries(data).map(item => ({key:item[0],value:item[1]}));
+            console.log(this.realRecord);
 
           },
-          (err:any) => {
+          (err:Error) => {
             this.toastrService.error('Get detail record failed !');
             setTimeout(() => {
               this.router.navigateByUrl('')
@@ -40,10 +43,15 @@ export class DetailRecordComponent implements OnInit {
     )
   }
 
-  onDeleteRecord(id:any){
+  onDeleteRecord(id:number){
     this.recordService.deleteRecord(id).subscribe(data => {
       this.router.navigateByUrl('/home')
     })
   }
 
+}
+
+interface IRealRecord {
+  key: string,
+  value: any
 }
