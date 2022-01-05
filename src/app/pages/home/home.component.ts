@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { RecordService } from 'src/app/core/services/record.service';
+import { IColumnName } from 'src/app/interfaces/ICoumnName';
+import { Irecord } from 'src/app/interfaces/IRecord';
 
 @Component({
   selector: 'app-home',
@@ -9,8 +11,9 @@ import { RecordService } from 'src/app/core/services/record.service';
 })
 export class HomeComponent implements OnInit {
   public numberPerPage:number = 10;
-  public listRecord?:Array<any>;
-  public listColumnsName:Array<any>;
+  public totalRecords!:number ;
+  public listRecord?:Array<Irecord>;
+  public listColumnsName:Array<IColumnName>;
 
   constructor(private recordService:RecordService) {
     this.listColumnsName = [
@@ -54,31 +57,50 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.recordService.getListRecord().subscribe(
-      res => {
-        this.listRecord = res
-      },
-      err => {
-        console.log(err);
-      }
-    )
+    this.recordService.params.sortField = 'id'
+
+    this.recordService.paramSubject.subscribe(res => {
+      this.recordService.getRecordByField(res).subscribe(data => {
+        this.listRecord = data
+      })
+
+      this.recordService.getRecordByField({...res,limit:'', currentPage:''}).subscribe(totalData => {
+        this.totalRecords = totalData?.length;
+      })
+    })
   }
 
   onChange(event:any):void {
-    this.numberPerPage = event.target.value;
+    this.recordService.params.limit = event.target.value;
+    this.recordService.paramSubject.next(this.recordService.params)
   }
 
   handleFilterByField(event:any){
-    this.recordService.getRecordByField(event.field, event.key).subscribe(
-      res => this.listRecord = res,
-      err => console.log(err)
-    )
+    this.recordService.params.searchFields.push(event);
+    this.recordService.paramSubject.next(this.recordService.params)
   }
 
   handleDeleteRecord(id:number){
     this.recordService.deleteRecord(id).subscribe(data => {
-      this.ngOnInit()
+      this.recordService.paramSubject.next(this.recordService.params)
     })
+  }
+
+  handleSortByField(event:any){
+    this.recordService.params = {
+      ...this.recordService.params,
+      sortField: event.key,
+      order: event.order
+    }
+    this.recordService.paramSubject.next(this.recordService.params)
+  }
+
+  handleChangePage(event:any){
+    this.recordService.params = {
+      ...this.recordService.params,
+      currentPage:event
+    }
+    this.recordService.paramSubject.next(this.recordService.params)
   }
 
 }

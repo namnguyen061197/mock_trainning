@@ -11,13 +11,16 @@
         </select>
       </div>
     </div>
-    <button type="button" class="btn btn-primary" routerLink="../new_record">{{'createRecord' | translate}}</button>
+    <button type="button" class="btn btn-primary" routerLink="../record/create">{{'createRecord' | translate}}</button>
   </div>
   <app-table
     [numberPerPage]="numberPerPage"
     [listColumnsName]="listColumnsName"
     [listRecord]="listRecord"
+    [totalItems]="totalRecords"
     (handleFilterByField)="handleFilterByField($event)"
     (handleDeleteRecord)="handleDeleteRecord($event)"
+    (handleSortByField)="handleSortByField($event)"
+    (handleChangePage)="handleChangePage($event)"
   ></app-table>
 </div>

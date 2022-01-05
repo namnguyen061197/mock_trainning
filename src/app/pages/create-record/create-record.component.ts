@@ -15,7 +15,7 @@ export class CreateRecordComponent implements OnInit {
   public recordForm!: FormGroup;
   public idRecord:string = ''
   public isEditMode:boolean = false;
-  public decimalPattern = /^\d*\.\d+$/;
+  // public decimalPattern = /^\d*\.\d+$/;
   public canLeavePage:boolean = false;
   public listGroupFields = [
     {
@@ -66,16 +66,16 @@ export class CreateRecordComponent implements OnInit {
       'Area':['', Validators.required],
       'AreaCode':['',Validators.required],
       'SalesVolume':['', [Validators.required, Validators.min(1)]],
-      'AveragePrice':['', [Validators.required, Validators.pattern(this.decimalPattern)]],
-      'Index':['', [Validators.required, Validators.pattern(this.decimalPattern)]],
-      'DetachedPrice':['', [Validators.required, Validators.pattern(this.decimalPattern)]],
-      'DetachedIndex':['', [Validators.required, Validators.pattern(this.decimalPattern)]],
-      'SemiDetachedPrice':['', [Validators.required, Validators.pattern(this.decimalPattern)]],
-      'SemiDetachedIndex':['', [Validators.required, Validators.pattern(this.decimalPattern)]],
-      'TerracedPrice':['', [Validators.required, Validators.pattern(this.decimalPattern)]],
-      'TerracedIndex': ['', [Validators.required, Validators.pattern(this.decimalPattern)]],
-      'FlatPrice':['', [Validators.required, Validators.pattern(this.decimalPattern)]],
-      'FlatIndex':['', [Validators.required, Validators.pattern(this.decimalPattern)]],
+      'AveragePrice':['', Validators.required],
+      'Index':['', Validators.required],
+      'DetachedPrice':['', Validators.required],
+      'DetachedIndex':['', Validators.required],
+      'SemiDetachedPrice':['', Validators.required],
+      'SemiDetachedIndex':['', Validators.required],
+      'TerracedPrice':['', Validators.required],
+      'TerracedIndex': ['', Validators.required],
+      'FlatPrice':['', Validators.required],
+      'FlatIndex':['', Validators.required],
       'IndexSA':'',
       'AveragePriceSA':'',
       '1m%Change':'',
@@ -115,7 +115,7 @@ export class CreateRecordComponent implements OnInit {
     regionNameField?.valueChanges.subscribe(value => {
       if(value){
         const group = this.listGroupFields.find(item => item.RegionName === value);
-        if(value){
+        if(group){
           AreaField?.setValue(group?.Area);
           AreaCodeField?.setValue(group?.AreaCode)
         }
@@ -132,7 +132,7 @@ export class CreateRecordComponent implements OnInit {
     return this.recordForm.get(field)?.hasError(error);
   }
 
-  public formatDate(date:any){
+  public formatDate(date:string){
     const newDate = date.split('/').map((item:any) => {
       if(item.length < 2){
         return '0' + item
