@@ -35,23 +35,28 @@ export class HomeComponent implements OnInit {
       },
       {
         name:'Average Price',
-        value:'AveragePrice'
+        value:'AveragePrice',
+        typeData: 'number'
       },
       {
         name:'Index',
-        value:'Index'
+        value:'Index',
+        typeData: 'number'
       },
       {
         name:'Sales Volume',
-        value:'SalesVolume'
+        value:'SalesVolume',
+        typeData: 'number'
       },
       {
         name:'Detached Price',
-        value:'DetachedPrice'
+        value:'DetachedPrice',
+        typeData: 'number'
       },
       {
         name:'Detached Index',
-        value:'DetachedIndex'
+        value:'DetachedIndex',
+        typeData: 'number'
       }
     ]
   }

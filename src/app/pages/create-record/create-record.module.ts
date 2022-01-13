@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateRecordComponent } from './create-record.component';
 import { ConfirmLeaveGuard } from 'src/app/core/guards/confirm-leave.guard';
@@ -30,6 +30,9 @@ const routes:Routes = [
     CommonModule,
     RouterModule.forChild(routes),
 
+  ],
+  providers: [
+    DecimalPipe
   ]
 })
 export class RecordModule { }

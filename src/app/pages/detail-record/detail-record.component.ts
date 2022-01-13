@@ -29,7 +29,6 @@ export class DetailRecordComponent implements OnInit {
           data => {
             this.record = data;
             this.realRecord = Object.entries(data).map(item => ({key:item[0],value:item[1]}));
-            console.log(this.realRecord);
 
           },
           (err:Error) => {
@@ -47,6 +46,10 @@ export class DetailRecordComponent implements OnInit {
     this.recordService.deleteRecord(id).subscribe(data => {
       this.router.navigateByUrl('/home')
     })
+  }
+
+  checkTypeof(value:any){
+    return typeof(value)
   }
 
 }

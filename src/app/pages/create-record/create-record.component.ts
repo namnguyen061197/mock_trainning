@@ -1,4 +1,4 @@
-import { Location } from '@angular/common';
+import { DecimalPipe, Location } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -56,7 +56,8 @@ export class CreateRecordComponent implements OnInit {
     private recordService:RecordService,
     private toastrService:ToastrService,
     private activedRoute:ActivatedRoute,
-    private router:Router
+    private router:Router,
+    private _decimalPipe:DecimalPipe
   ) {}
 
   ngOnInit(): void {

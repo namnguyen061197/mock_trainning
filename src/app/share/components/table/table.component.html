@@ -13,7 +13,9 @@
     <tbody>
       <tr *ngFor="let record of listRecord | orderBy: key | paginate: { itemsPerPage: numberPerPage, currentPage: currentPage, totalItems: totalItems }">
         <td *ngFor="let columnName of listColumnsName">
-          {{columnName.value === 'Date' ? (record[columnName.value] | date :'shortDate' ) : record[columnName.value]}}
+          {{columnName.value === 'Date' ? (record[columnName.value] | date :'shortDate' ) :
+            (columnName.typeData === 'number' ? (record[columnName.value] | number:'1.0-2') : record[columnName.value])
+          }}
         </td>
         <td class="actions">
           <button type="button" class="btn btn-primary" style="font-size: 14px;" routerLink="../detail/{{record.id}}">{{'detail'|translate}}</button>

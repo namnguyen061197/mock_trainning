@@ -1,4 +1,5 @@
 export interface IColumnName {
   name: string,
-  value: string 
+  value: string ,
+  typeData?: string
 }
