@@ -35,7 +35,7 @@
           </div>
           <div class="input-field">
             <label>Sales Volume <span class="text-danger">*</span></label>
-            <input type="number" class="form-control px-2" formControlName="SalesVolume">
+            <input type="number" class="form-control px-2" formControlName="SalesVolume"  >
             <div *ngIf="isFieldValid('SalesVolume')" class="text-danger">
               <p *ngIf="isFieldHasError('SalesVolume','required')">Sales Volume {{'validator.required'|translate}}</p>
               <p *ngIf="isFieldHasError('SalesVolume','min')">Sales Volume {{'validator.positive'|translate}}</p>

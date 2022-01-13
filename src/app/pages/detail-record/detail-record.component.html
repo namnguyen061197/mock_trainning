@@ -11,7 +11,12 @@
           <div class="col-lg-4 col-sm-12 detail-record" >
             <div class="d-flex justify-content-between">
               <h6>{{obj.key}} :</h6>
-              <p>{{obj.value || 'NULL'}}</p>
+              <p *ngIf="checkTypeof(obj.value) == 'number'; else notNumberData">
+                {{obj.key !== 'id' ? ( obj.value | number:'1.0-2') : (obj.value)}}
+              </p>
+              <ng-template #notNumberData>
+                <p>{{obj.value || "NULL"}}</p>
+              </ng-template>
             </div>
             <hr>
           </div>
